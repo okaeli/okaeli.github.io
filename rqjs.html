@@ -1,0 +1,160 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title></title>
+
+<script>
+  // 倒计时
+var Day;
+var Minute;
+var Second;
+var mia;
+// 页面加载事件
+window.onload = function () {
+    Day = document.querySelectorAll(".sj>div>span")[1];
+    // console.log(Day);
+    Minute = document.querySelectorAll(".sj>div>span")[3];
+    // console.log(Minute);
+    Second = document.querySelectorAll(".sj>div>span")[5];
+    // console.log(Second);
+    mia = document.querySelectorAll(".sj>div>span")[7];
+    // console.log(mia);
+}
+
+
+// 闭包函数  具体代码
+function getNowToNewYear() {
+    // 时间对象
+    var Now = new Date();
+    // 验证
+    // console.log(Now.getTime());
+    // 新年时间
+    var newyearstr = document.getElementById("jssj").value;
+    console.log("test"+newyearstr);
+    var oldyearstr = document.getElementById("kssj").value;
+    console.log("test"+newyearstr);
+    var NewYear = new Date(newyearstr);
+    var OldYear = new Date(oldyearstr);//"2022-8-15"
+    // 验证
+    // console.log(NewYear.getFullYear(), NewYear.getMonth(), NewYear.getDate());
+    // console.log(NewYear.getTime());
+    // console.log(NewYear.getTime() - Now.getTime());
+    // 时间戳 新年到现在的差值
+    var sjc = NewYear.getTime() - OldYear.getTime();
+    // console.log((sjc / 1000 / 60 / 60 / 24));
+    // 时间戳 单位是毫秒 /1000得到秒数
+    sjc = (sjc / 1000);
+    // 天数
+    var day = parseInt(sjc / 60 / 60 / 24);
+    day = day +1;
+    // console.log(day);
+    // 去掉整天数  余下的小时数
+    var hours = parseInt(sjc / 60 / 60 % 24);
+    // console.log(hours);
+    // 去掉整小时数 余下的分钟数
+    var minutes = parseInt(sjc / 60 % 60);
+    // console.log(minutes);
+    // 去掉整分钟数 余下的秒数
+    var miao = parseInt(sjc % 60);
+    // console.log(miao);
+    // 将得到的值 赋值给相对应的元素对象的innerHTML  在页面显示出来
+    mia.innerHTML=miao;
+    Second.innerHTML=minutes;
+    Minute.innerHTML=hours;
+    Day.innerHTML=day;
+}
+// 定时器  每隔一秒计算一下时间
+// window.setInterval(function (){
+//     // 计时器执行的程序   闭包函数
+//     return getNowToNewYear;
+// }(),1000);
+
+
+      
+
+</script>
+<style>
+
+body,
+html {
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  /* background-color: black; */
+}
+
+.heading{
+  color:red;
+  margin-top: 145px;
+  text-align: center;
+}
+
+h2,h3,h4 {
+  margin-top: 25px;
+}
+.ending{
+  color:whitesmoke;
+  margin-top: 300px;
+  text-align: center;
+}
+
+canvas {
+
+position: absolute;
+
+top:10px;
+left:25%;
+
+width: 50%;
+
+height: 63%;
+
+}
+/* .sj > div{
+  float: left;
+} */
+
+.sj{
+  font-size: 30px;
+  color:black;
+  text-align: center;
+  margin-top: 130px;
+}
+.fir{
+  color: white;
+  font-size: 20px;
+}
+h3 > span{
+  color:white;
+  font-size: 20px;
+}
+.cs{
+  color:salmon;
+}
+</style>
+
+</head>
+
+<body>
+
+
+<!-- <div class="heading">
+    <span class="fir">等到这一天的到来还有</span>
+</div> -->
+<div style="text-align: center;">
+  <p>请输入起始日期</p>起：<input id="kssj" type="text" name="" id="" placeholder="2022-8-15">始：<input id="jssj" type="text" name="" id="" placeholder="2022-12-31"><input type="button" value="计算" onclick="getNowToNewYear()">
+</div>
+<div class="sj">
+    <div><span>间隔天数为:</span><span class="cs"></span><span class="zi">天</span></div>
+    <div style="display: none;"><span class="cs"></span><span class="zi">小时</span></div>
+    <div style="display: none;"><span class="cs"></span><span class="zi">分钟</span></div>
+    <div style="display: none;"><span class="cs"></span><span class="zi">秒</span></div>
+</div>
+
+</body>
+
+</html>
